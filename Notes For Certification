@@ -1,0 +1,449 @@
+NOTES FOR DEVELOPER CERTIFICACTION
+
+Process Builder 
+
+* Update any related record
+* Create a record
+* Use a quick action to create a record, update a record, or log a call
+* Launch a flow
+* Send an email
+* Post to Chatter
+* Submit for approval
+* Call apex method
+
+   DOSE NOT SUPPORT OUTBOUND MESSAGES
+
+Workflow    
+
+* Update Fiel
+* Create a Task
+* Email Alert
+* Outbound Message
+
+
+Validation Rules
+
+* Used to improve data quality
+* Display error to avoid saving wrong data
+
+SOQL  when you know which objects the data resides in, and you want to:
+* Retrieve data from a single object or from multiple objects that are related to one another.
+* Count the number of records that meet specified criteria.
+* Sort results as part of the query.
+* Retrieve data from number, date, or checkbox fields.
+
+SOSL when you don’t know which object or field the data resides in, and you want to:
+* Retrieve data for a specific term that you know exists within a field. Because SOSL can tokenize multiple terms within a field and build a search index from this, SOSL searches are faster and can return more relevant results.
+* Retrieve multiple objects and fields efficiently where the objects might or might not be related to one another.
+* Retrieve data for a particular division in an organization using the divisions feature.
+* Retrieve data that’s in Chinese, Japanese, Korean, or Thai. Morphological tokenization for CJKT terms helps ensure accurate results.
+
+
+Sharing Keywords
+
+* The sharing setting of the class where the method is defined is applied, not of the class where the method is called. For example, if a method is defined in a class declared with with sharing is called by a class declared with without sharing, the method will execute with sharing rules enforced.
+* If a class isn’t declared as either with or without sharing, the current sharing rules remain in effect. This means that the class doesn’t enforce sharing rules except if it acquires sharing rules from another class. For example, if the class is called by another class that has sharing enforced, then sharing is enforced for the called class.
+* Both inner classes and outer classes can be declared as with sharing. The sharing setting applies to all code contained in the class, including initialization code, constructors, and methods.
+* Inner classes do not inherit the sharing setting from their container class.
+* Classes inherit this setting from a parent class when one class extends or implements another.
+
+Roll-up Summary
+                
+* Any custom object that is on the master side of a master-detail relationship
+* Any standard object that is on the master side of a master-detail relationship with a custom object
+* Opportunities using the values of opportunity products related to the opportunity
+* Accounts using the values of related opportunities
+* Campaigns using campaign member status or the values of campaign member custom fields
+* Auto number fields are not available as the field to aggregate in a roll-up summary field.
+* After you have created a roll-up summary field on an object, you cannot convert the object's master-detail relationship into a lookup relationship.
+* Roll-up summary fields are not available for mapping lead fields of converted leads.
+* You can’t use long text area, multi-select picklist, Description fields, system fields like Last Activity, cross-object formula fields, and lookup fields in the field column of roll-up summary filters.
+
+Types of fields can be calculated 
+* Number, currency, and percent fields are available when you select SUM as the roll-up type.
+* Number, currency, percent, date, and date/time fields are available when you select MIN or MAX as the roll-up type.
+
+Lightning Componenets
+                
+* New componen framework  to build dynamic mobile and web  applications
+* Bases on the open source Aura framework
+* Fully integrated into Force.com && Salesforce1
+* Provides building blocks to assemble responsive web and mobile apps
+* Native to the platform
+* Commercial AppExchange
+* Supports other JavaScripts
+* Components are:
+        * UI Building blocks
+        * A bundle of UI resources
+        * Object-oriented
+        * Extendable and reusable across apps and orgs
+        * Metadata
+        * Encapsulated markup, logic and style
+        * Responsive UI rendering
+        * Components communicate with each other with publish/subscribe eventing model
+
+    
+Apex
+                
+* Force all in browser
+* App from different org run on a common technology infrastacture
+* App share hardware storage an infrastructure
+* Multatinecy is implemented tho a metada-driven archtecture
+* Upgrade 3 times a year
+* Development environments upgrades early
+* Migration Tools:
+    * Change sets
+    * Force.com migration tool
+    * Force.com IDE
+
+Force.com IDE
+    
+* Create Apex and Visuaforce code, store filed locally and sync it to a Salesforce org.
+* Deploy code and metadata from one org to another.
+* Utilize code-completion functionality to make programming easier.
+* Browse and query the objects and fields in a salesforce org.
+
+Apex Triggers
+                    
+* Primary mechanism to Execute code within apex apex when a DML event occurs on a specific sObject
+* Execute before or after DML events
+* Before Triggers
+    * Update or validate values before they are saved to the database
+* After Triggers
+    * Trigger accesses fields values that are set automatically or affect changes in other records
+* Data-Driven Sharing. Apex triggers automate record sharing base on dynamic data driven record criteria
+    * Grant access
+    * Modify access
+    * Revoke access
+* Complex Validation rules
+    * Execute validation logic upon record deletion
+    * Utilize complex data base queries to verify data quality
+* Callout to an External Web Serivce
+* Should have capability to process multiple records at a time
+* Can also execute through API access
+* Run as system baby default (it can see  more than the user, prevent this with with sharing)
+* Cannot modify fields that are set during the system save operation
+* Trigger can’t contain the static keyword
+* Only contain keywords applicable to an inner class
+* Trigger can execute a maximum of 200 records ata time
+* if the number of records exceeds 200 triggers are executed in chunks of 200
+
+Execution Order
+
+* The original record is loaded from the database (or initialized for an insert statement)
+* The new record field values are loaded and old values are overwritten
+* System validation rules are executed and required field are verified
+* All before triggers are executed
+* Most system validations steps are run again and validation rules are checked
+* The record is saved to the database, but not committed
+* All after triggers are executed
+* Assignment rules , auto-autoresponder rules and workflow rules are executed
+* Records are updated again if workflow fields are updated
+* Before and after triggers are executed again  if fields are updated base on workflow rules
+* Processes are executed
+* Escalation rules are executed
+* Entitlement rules are executed
+* Rol-up summary formula or cross-object formula fields are updated in the parent records and affected record are saved
+* Repeat the same process for affected grand parent records
+* Criteria based sharing evaluation is executed
+* All DML operations are committed to the database
+* Post-commit logic is executed
+
+Case of use for apex and visualforce
+                
+* Custom Button Action
+    * Create custom operation called from a button or link to preformed multiple actions or apply a single action to multiple targets
+* Cleanse / Repair Existing records
+    * Scheduled Apex and Anonymous Apex help to identify duplicated record and merge results
+* Custom Report Page
+    * A custom VisualForce page and controller enables you to view record resulting from a complex query, such as 
+        * Exception reporting
+        * View record from multiple related lists
+        * Support custom visual components for searching/filtering
+
+Lists
+                
+* Implicit index 
+* Ordered
+* No unique elements
+* Store the resulte of a SQL query  
+
+Sets
+                
+* No index
+* No order
+* Unique elements
+* Hole values used to filter data queried by SOQL
+
+Maps
+                
+* Key
+* Element Pair
+* No order
+* Key must be unique
+* Cache of records indexed by ID
+ 
+Class
+                
+* Is a template or blueprint from which objects are created
+* Consists of methods and attributes
+* Is stored with the version of API that is used to compile it
+* My contain other classes, known as inner classes
+
+Apex Classes
+                
+* Inner classes can only be tasted one level deep\
+* Static methods and attributes can only be declared in the top-level class definition
+* To create new exception classes, the system-defined base class Exception must be extended
+* Can be enabled or disabled for profiles
+
+
+Class Syntax
+                
+* Global
+    * Is accessible within and outside of the org or namespace
+    * All methods and attributes , and inner classes there are global must be within a global class to be accessible
+    * All methods and attributes with the webService keyword must be global
+* Public
+    * Is visible across the application, org or namespace that comprises the class
+* Private
+    * When you use the keyword private in a class definition of a inne class , the inner class is only accessible to the outer class
+    * Top-Level or outer classes must be either a global or a public 
+    * The default access level for inner classes is private
+* With sharing
+    * Record-level sharing privileges are enforced to the class
+    * when performing a DML operation, the user can only update the records to which he or she has edit-level access
+* Without sharing
+    * When a user queries or update the database, the record-level read or update restrictions are not taken into account
+    * When neither with sharing nor without sharing is specified on a class declaration, the class will run in without sharing mode, with 2 exceptions
+
+
+Constructor
+                
+* Is a special method used to create an object of a class
+* Has the same name as the class
+* Is the first method that is invoked in the class
+* Dose nit have an explicit return type
+* Is available by default in each class as invisible and without parameters
+* Can be overloaded by defining multiple constructor with different parameters
+
+System Class
+                
+* Is a static class
+* Contains only static method, which can be directly called with no instantiation
+ 
+User Class
+                
+* Class that contains mostly getter methods
+
+Apex Approval Processing
+                
+* Apex process classes are used to submit Approval requests and process the results of those requests.
+* ProcessRequest
+    * Used to process the objects from its child classes
+* ProcessSumbitRequest
+    * Used to submit a record for approval
+* ProcessResult
+    * Usted to process the result of an Approval process
+* ProcessWorkItemRequest
+    * Used to process an item after it is submitted
+
+DataBase Class
+                
+* Are static methods available in the Database class
+* Include an optional Boolean allOrNone parameter that defaults to true
+* Database.update() and Database.insert() return a SaveResault object
+* DML options provide a greater control on DML operations and helps in:
+    * Include additional information such as:
+        * Truncation behavior
+        * Locale options
+        * Trigger assignment rules
+    * Trigger email notifications base on specific events, such as:
+        * Creation of a new case or task
+        * Creation of a case comment
+        * Conversion of a case email to a contact
+        * New user email notifications
+        * Password reset
+* DML limit = 150 (200 records per DML)
+
+APEX SOQL And DML Governor Limits
+                
+* Governor limits on apex soil and dml help ensure that the code is as efficient as possible.
+* When governor limits are reached you can consider using apex asynchronous batch processing for DML operations
+* SOQL must be outside loops
+* BULK allow a major number of DML statements
+* Creating selective queries helps to retrieve just the necessary information
+
+Database transactions
+                
+* A transaction is a sequence of events based on the first event you perform
+* Depending on the type of DML statement used you can  control the transaction level in the database
+* All transactions are controlled by 
+    * Trigger
+    * Web Serive
+    * An anonymous block
+* If the Apex script completes successfully, all changes in the data are implicitly committed to the database
+* Transaction savepoints:
+    * Are steps in the transaction that specify the state of database at a specific time
+* You can rollback a transaction up the the last save point
+* setSavePoint and rollback count against the total number of DML statements
+
+Exceptions
+                
+* Errors and other events that disrupt the execution of code
+* Info:
+    * The error
+    * The type of error
+    * The state of the script or program when the error occurred
+* Its call “Throwing an exception” when the error is send to the apex Engine
+
+Exceptions Types
+                
+* throw
+    * Indicates that an error has occurred and provides an exception object
+* try
+    * Identifies the block of code where the exception can occur
+* Catch
+    * identifies the block of code that can handle a specific exception
+* Finally
+    * Identifies block of code that is guaranteed to execute after a try block
+
+Debugging
+                
+* process of locating and reducing the number of errors in the cod
+* Logs 
+    * Help identify run-time problems
+    * Use runtime functionality, interactions between logic features 
+        * Developer Console:  Display the output to the user
+        * Debug Logs: Assigned to a specific user to track  the output before executing code
+* Anonymous Blocks
+    * Allows developer to identify errors with syntax at compile time
+* System log
+    * Records errors and system processes that occur in an organization
+    * Record entries for every user whenever an apex script, a rule or an approval process executes
+    * Can ve view using the salesforce UI or the force.com IDE
+    * limited to 2MB
+    * Each org can retain up to 50MB logs
+
+ANONYMOUS BLOCKS
+                
+* Does not get stored in the metadata
+* Helps identify compile-time problems
+* Get dynamically compiled and executed
+* Its executed using the full permission of the current user
+* Returns results that include status information for the compile and execute phases of the call and any error that occur
+* Can be used to write scripts that change dynamically at runtime
+* Cannot include the static keyword
+* Can execute with:
+    * ExecuteAnonymous() Web services API call
+    * Developer console within the salesforce ui
+    * Force.comIDE 
+
+Test Class 
+
+* Salesforce requieres developers to create and run unit test on their Apex code
+* Governor limits are applied to running unit test
+* Developers should check that their code us governor limit compliant
+* Use the statTest and stopTest system static methods with the testMethod to test governor limits
+* These methods my only be called once within each testMethos
+* Insert the startTest method after all of the test infrastructure has been set and jus prior the actual misted to be tested
+    * After the startTest method, system will track a separate set of governor limits for analysis
+    * The startTest method stores your per-transaction limit centers and temporally Resets them to zero
+* Use the stopTest method to restore your limit confers to pre-StartTest values
+* Ways to run unit test
+    * Salesforce UI (all classes)
+    * Class - Run Test
+    * Force.com IDE
+    * runTest() web Service method to run unit test through a call to the API
+* Cover at least 75 percent of Apex script
+* Ensure that the unit test completes successfully without throwing exceptions
+* System.assert to verify the expected results
+* System.runAs to test record sharing and data accessibility
+
+Web service 
+
+* The web service keyword:
+    * Allows developers to create their own SOAP web service
+    * Defines methods that are inherently global
+    * Enables more access than global
+* 2 ways to invoke a custom SOAP Web Services
+    * From the AJAX toolkit
+    * From a client programar
+* WSDL support is provided automatically for custom web services 
+* Basic guidelines
+    * web service methods must be static and cannot be overloaded
+    * web services method signatures cannot include exceptions, maps, sets, matchers, patterns
+    * The web service keyword cannot be used in any code contained in a trigger 
+    * web service methods execute as system by default and can be changed using with sharing keyword
+    * @readOnly annotation can be used with Web Service to allow unrestricted queries when no DML operations are necessar 
+
+SOAP Web Service Callout
+                
+* Functionality is grouped based on business processes and is packaged as interoperable services
+* Functions are separated into distinct units  or services, which are available over the netwok so that these can be combined and reused to produce business applications
+* An external web service can be called natively from Apex by using SOAP Web Service callouts
+
+WSDL
+                
+* is de bases to the apex class we are creating
+* Apex supports:
+    * limited set of WSDL schema types.
+    * The element and sequence WSDL schema constructs
+    * Blob,decimal and enum for call INS but not for call outs
+* Apex dose not support
+    * Encoded services
+    * WSDL field with multiple portTypes
+    * WSDL that exceed the size limit
+HTTP headers
+                
+* Can be set on a web service to callout ti set the value of a cookie in a authorization header
+
+APEX REST-BASED WEB SERVICE (Representational State Transfer)
+                
+* Implement custom web services in apex using apex Rest
+* Define your class with the @RestResource annotation to expose it as a REST Web Service
+* Annotate methods to be exposed with the appropriate HTTP method
+* @HttpGet or @HttpDelete annotations should have no parameters
+
+XML CLASSES
+                
+* Callout can be made from when a WSDL has not been imported
+* External Web Services can be accessed using HTTP callouts
+* XMLStreamReader Class:
+    * Used to read through XML responses returned from callouts
+    * Enables forward, read-only access tp XML data returned from an HTTP callout
+* XMLStreamWriter Class
+    * Used to create an XML Document
+    * Enables the writing of XML DATA
+
+Asynchronous Apex
+                
+* There is a limit on the number of concurrent Apex threads allowed per ORG
+* Use asynchronous Apex, if Apex process takes more than 5 seconds 
+* To identify methods that are asynchronously executed, use the @future annotation
+* Methods with the @future annotation must be static methods and can only return a void type
+* use @futuere annotation:
+    * Isolate DML operations and different sObject types
+    * Make a Web Service callout from a trigger..
+
+
+Email Services
+
+* Email services use Apex classes to process inbound emails
+* Each email service has Salesforce-generated email address to which user can send messages
+* The total number of messages that all email services put tougher can process in day is calculated by multiplying the number of the licenses by 1000
+    * Messages that exceed this limit are bounced, discarded or queued based on how the failure response settings for each email service are configured
+* Email addresses created in a sandbox org cannot be deployed to a production org
+
+
+Inbound Email Services
+                
+* Setting up Inbound Email Services
+    * Create the email handler class shell
+    * Configure an email service
+    * Complete the email handler class
+    * Configure failure response setting
+    * Generate service email addresses
+    * Activate service email addresses
+    * Test inbound email
+* 
